@@ -5,6 +5,8 @@ import datetime
 class PatientCreate(BaseModel):
     name: str
     age: int
+    gender: str | None = None
+    phone: str | None = None
 
 class WeightResponse(BaseModel):
     weight: float

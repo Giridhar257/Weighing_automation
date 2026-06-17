@@ -129,12 +129,15 @@ def get_db():
 # Register patient
 @app.post("/register")
 def register(patient: PatientCreate, db: Session = Depends(get_db)):
+    print("Received:", patient.dict())
     code, img = bc.generate_barcode()
-    new_patient = crud.create_patient(db, patient.name, patient.age, code)
+    new_patient = crud.create_patient(db, patient.name, patient.age, code,patient.gender,patient.phone)
 
     return {
         "name": new_patient.name,
         "age": new_patient.age,
+        "gender": new_patient.gender,
+        "phone": new_patient.phone,
         "barcode": code,
         # 🔧 FIX: use your real IP instead of 192.168.56.1
         "barcode_image": f"http://10.65.139.44:8000/{img}.png"

@@ -22,13 +22,29 @@
 from sqlalchemy.orm import Session
 from models import Patient, Weight
 
-def create_patient(db: Session, name: str, age: int, barcode: str):
-    patient = Patient(name=name, age=age, barcode=barcode)
+def create_patient(
+    db,
+    name,
+    age,
+    barcode,
+    gender=None,
+    phone=None,
+    openmrs_uuid=None
+):
+    patient = Patient(
+        name=name,
+        age=age,
+        barcode=barcode,
+        gender=gender,
+        phone=phone,
+        openmrs_uuid=openmrs_uuid
+    )
+
     db.add(patient)
     db.commit()
     db.refresh(patient)
-    return patient
 
+    return patient
 
 def get_patient_by_barcode(db: Session, barcode: str):
     return db.query(Patient).filter(Patient.barcode == barcode).first()

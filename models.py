@@ -4,11 +4,18 @@ import datetime
 
 class Patient(Base):
     __tablename__ = "patients"
+
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
+
+    name = Column(String, nullable=False)
     age = Column(Integer)
+
+    gender = Column(String)
+    phone = Column(String)
+
     barcode = Column(String, unique=True)
 
+    openmrs_uuid = Column(String, nullable=True)
 class Weight(Base):
     __tablename__ = "weights"
     id = Column(Integer, primary_key=True, index=True)

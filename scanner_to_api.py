@@ -1,7 +1,8 @@
 import sys
 import requests
 
-API_URL = "http://10.65.139.44:8000/scan"
+# API_URL = "http://10.65.139.44:8000/scan"
+API_URL = "https://weighingautomationback-production.up.railway.app/scan"
 
 print("Ready. Scan barcode...")
 
