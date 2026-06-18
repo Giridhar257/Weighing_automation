@@ -23,7 +23,8 @@ class WeightCreate(BaseModel):
     weight: float
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
 class ScanCreate(BaseModel):
     barcode: str
