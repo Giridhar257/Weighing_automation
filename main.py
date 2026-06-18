@@ -94,7 +94,7 @@ from schemas import WeightCreate
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from schemas import ScanCreate
-import hid
+#import hid
 import threading
 
 last_scanned_barcode = None
@@ -220,37 +220,37 @@ def status():
     return {"ready": last_scanned_barcode is not None}
 
 
-def scanner_listener():
-    global last_scanned_barcode
+# def scanner_listener():
+#     global last_scanned_barcode
 
-    try:
-        device = hid.device()
+#     try:
+#         device = hid.device()
         
-        # You must replace these with your scanner values
-        VENDOR_ID = 1504
-        PRODUCT_ID = 4608
+#         # You must replace these with your scanner values
+#         VENDOR_ID = 1504
+#         PRODUCT_ID = 4608
 
-        device.open(VENDOR_ID, PRODUCT_ID)
+#         device.open(VENDOR_ID, PRODUCT_ID)
 
-        print("Scanner connected")
+#         print("Scanner connected")
 
-        barcode = ""
+#         barcode = ""
 
-        while True:
-            data = device.read(64)
+#         while True:
+#             data = device.read(64)
 
-            if data:
-                for d in data:
-                    if d == 40:  # ENTER key
-                        if barcode:
-                            last_scanned_barcode = barcode
-                            print("Scanned:", barcode)
-                            barcode = ""
-                    elif d > 0:
-                        barcode += chr(d)
+#             if data:
+#                 for d in data:
+#                     if d == 40:  # ENTER key
+#                         if barcode:
+#                             last_scanned_barcode = barcode
+#                             print("Scanned:", barcode)
+#                             barcode = ""
+#                     elif d > 0:
+#                         barcode += chr(d)
 
-    except Exception as e:
-        print("Scanner error:", e)
+#     except Exception as e:
+#         print("Scanner error:", e)
 
 @app.post("/live-weight")
 def live_weight(data: dict):
